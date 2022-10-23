@@ -73,8 +73,8 @@ def on_message(client, userdata, msg):
     topic = str(msg.topic.split('/')[-1])
     current_entry[topic] = int(msg.payload.decode())
 
-    if (current_entry[topic] is not None):
-        history.flush()
+    #if (current_entry[topic] is not None):
+    #    history.flush()
 
 
 def on_connect(client, userdata, flags, rc):
