@@ -9,12 +9,12 @@ import aiofiles
 
 mqtt_broker = "test.mosquitto.org"
 
-
 class Results:
     '''Stores values of devices'''
 
-    def __init__(self, topics_num=0):
+    def __init__(self,case_num, topics_num=0):
         self.topics_num = topics_num
+        self.case_num = case_num
         self.current_entry = {}
         self.backbone = []
 
@@ -31,6 +31,7 @@ class Results:
 
 
         self.current_entry["time"] = str(datetime.datetime.now().time().strftime("%H:%M:%S"))
+        self.current_entry["case_num"] = self.case_num
         self.backbone.append(copy.copy(self.current_entry))
         print(self.backbone)
         self.current_entry.clear()
@@ -64,7 +65,7 @@ TOPICS = [
     "/devices/wb-msw-v3_21/controls/Temperature"
 ]
 
-history = Results(topics_num=len(TOPICS))
+history = Results(case_num=16, topics_num=len(TOPICS))
 
 
 def on_message(client, userdata, msg):
